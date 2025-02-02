@@ -1,0 +1,39 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual Environment
+venv/
+env/
+
+# Flask instance folder
+instance/
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Log files
+*.log
+logs/
+
+# Configuration files
+.env
+
+# Test files
+*.coveragerc
+.tox/
+.nox/
+.hypothesis/
+.coverage
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Database files
+*.sqlite3
+*.db
