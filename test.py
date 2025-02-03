@@ -4,8 +4,8 @@ from tensorflow.keras.models import load_model
 import numpy as np
 
 # Load the saved model and scaler
-model = load_model("anxiety_model.h5")  # Updated model file name
-scaler = joblib.load("scaler.pkl")  # Updated scaler file name
+model = load_model("anxiety_model.h5") 
+scaler = joblib.load("scaler.pkl")  
 
 # Create a DataFrame from the test data
 test_data = {
