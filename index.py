@@ -5,6 +5,7 @@ from tensorflow.keras.models import load_model
 from flask_cors import CORS 
 import numpy as np
 from flask_pymongo import PyMongo
+from datetime import datetime
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb+srv://trueself:trueself@cluster0.ytknj.mongodb.net/trueselfDB?retryWrites=true&w=majority&appName=Cluster0"
@@ -78,7 +79,9 @@ def predict(user_id):
             "therapySessions": data['Therapy Sessions (per month)'],
             "recentMajorLifeEvent": data['Recent Major Life Event'],
             "dietQuality": data['Diet Quality (1-10)'], 
-            "occupation": user_occupation if user_occupation else "Unknown"
+            "occupation": user_occupation if user_occupation else "Unknown",
+             "createdAt": datetime.utcnow(),
+             "updatedAt": datetime.utcnow()
         })
         
         return jsonify({
