@@ -6,12 +6,22 @@ from flask_cors import CORS
 import numpy as np
 from flask_pymongo import PyMongo
 from datetime import datetime
+import tensorflow as tf
+import flask
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb+srv://trueself:trueself@cluster0.ytknj.mongodb.net/trueselfDB?retryWrites=true&w=majority&appName=Cluster0"
 mongo = PyMongo(app)
 
 CORS(app)
+
+
+
+@app.route('/check-tf-logs')
+def check_tf_logs():
+    devices = tf.config.list_physical_devices()
+    return flask.jsonify({"devices": [str(device) for device in devices]})
+
 @app.route('/')
 def home():
     try:
