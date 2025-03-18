@@ -6,6 +6,7 @@ from flask_cors import CORS
 import numpy as np
 from flask_pymongo import PyMongo
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb+srv://trueself:trueself@cluster0.ytknj.mongodb.net/trueselfDB?retryWrites=true&w=majority&appName=Cluster0"
@@ -91,5 +92,6 @@ def predict(user_id):
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=4000)
+    port = int(os.getenv("PORT", 5000))  # Get port from Render, default to 5000
+    app.run(debug=False, host="0.0.0.0", port=port)
 
