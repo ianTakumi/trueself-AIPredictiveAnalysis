@@ -68,19 +68,19 @@ def predict(user_id):
             'userId': user_id,
             "severityScore": round(float(predicted_severity[0][0]), 2),
             "age": data['Age'],
-            "sleepHours": data['Sleep Hours'],
-            "physicalActivity": data['Physical Activity (hrs/week)'],
-            "caffeineIntake": data['Caffeine Intake (mg/day)'],
-            "alcoholConsumption": data['Alcohol Consumption (drinks/week)'],
+            "sleepHours": float(data['Sleep Hours']),
+            "physicalActivity": float(data['Physical Activity (hrs/week)']),
+            "caffeineIntake": float(data['Caffeine Intake (mg/day)']),
+            "alcoholConsumption": float(data['Alcohol Consumption (drinks/week)']),
             "smoking": data['Smoking'],
             "familyHistory": data['Family History of Anxiety'],
             "stressLevel": data['Stress Level (1-10)'],
-            "heartRate": data['Heart Rate (bpm during attack)'],
-            "breathingRate": data['Breathing Rate (breaths/min)'],
+            "heartRate": int(data['Heart Rate (bpm during attack)']) if isinstance(data['Heart Rate (bpm during attack)'], str) and data['Heart Rate (bpm during attack)'].isdigit() else float(data['Heart Rate (bpm during attack)']),
+            "breathingRate": int(data['Breathing Rate (breaths/min)']) if isinstance(data['Breathing Rate (breaths/min)'], str) and data['Breathing Rate (breaths/min)'].isdigit() else float(data['Breathing Rate (breaths/min)']),
             "sweatingLevel": data['Sweating Level (1-5)'],
             "dizziness": data['Dizziness'],
             "medication": data['Medication'],
-            "therapySessions": data['Therapy Sessions (per month)'],
+            "therapySessions": int(data['Therapy Sessions (per month)']) if data['Therapy Sessions (per month)'].isdigit() else float(data['Therapy Sessions (per month)']),
             "recentMajorLifeEvent": data['Recent Major Life Event'],
             "dietQuality": data['Diet Quality (1-10)'], 
             "occupation": user_occupation if user_occupation else "Unknown",
@@ -95,6 +95,6 @@ def predict(user_id):
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    port = int(os.getenv("PORT", 5000))  # Get port from Render, default to 5000
+    port = int(os.getenv("PORT", 4000))  
     app.run(debug=False, host="0.0.0.0", port=port)
 
